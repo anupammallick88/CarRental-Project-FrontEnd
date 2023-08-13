@@ -2,7 +2,7 @@
 
 ## Table of contents
 * [About the Project](#about-project)
-* [Setup](#setup)
+
 
 ## About Project
 I did this project to improve my frontend skills and my Angular knowledge. 
