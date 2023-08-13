@@ -1,0 +1,88 @@
+<div *ngIf="CartItems.length===0" class="page">
+    <h1>
+        Please select the vehicle.
+    </h1>
+</div>
+<div>
+
+    <div *ngIf="CartItems.length>0" class="page">
+        <div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Car Name</th>
+                        <th>Brand</th>
+                        <th>Colour</th>
+                        <th>Model</th>
+                        <th>Daily Price</th>
+                        <th>Description</th>
+
+
+                    </tr>
+                </thead>
+                <tr *ngFor="let cart of CartItems">
+                    <td>{{ cart.car.carName }}</td>
+                    <td>{{ cart.car.brandName }}</td>
+                    <td>{{ cart.car.colorName }}</td>
+                    <td>{{ cart.car.modelYear }}</td>
+                    <td>{{ cart.car.dailyPrice }}</td>
+                    <td>{{ cart.car.description }}</td>
+
+                </tr>
+            </table>
+        </div>
+
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th><strong> Vehicle Name</strong></th>
+                        <th><strong> {{rentDate}}</strong></th>
+                        <th><strong> {{returnDate}}</strong></th>
+
+                    </tr>
+                </thead>
+
+                <tbody *ngIf="totalDate!==totalCar">
+                    <tr *ngFor="let cart of CartItems">
+                        <td>{{cart.car.carName}}</td>
+                        <td>
+                            <mat-form-field>
+                                <input matInput [ngxMatDatetimePicker]="start" placeholder="{{rentDate}}"
+                                    [formControl]="cart.dateControlStart" [min]="today">
+                                <mat-datepicker-toggle matSuffix [for]="$any(start)"></mat-datepicker-toggle>
+                                <ngx-mat-datetime-picker #start>
+                                </ngx-mat-datetime-picker>
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-form-field>
+                                <input matInput [ngxMatDatetimePicker]="end" placeholder="{{returnDate}}"
+                                    [formControl]="cart.dateControlEnd" [min]="min">
+                                <mat-datepicker-toggle matSuffix (click)="setMin(cart.dateControlStart.value)"
+                                    [for]=" $any(end)">
+                                </mat-datepicker-toggle>
+                                <ngx-mat-datetime-picker #end>
+                                </ngx-mat-datetime-picker>
+                            </mat-form-field>
+                        </td>
+
+                    </tr>
+
+                </tbody>
+                <tfoot *ngIf="totalDate!==totalCar">
+                    <button (click)="setTotalDate(CartItems)" type="button" class="btn btn-primary">Approve</button>
+                </tfoot>
+            </table>
+
+            <tr *ngFor="let cart of CartItems">
+
+                <td>{{rentDate}}: {{cart.dateControlStart.value?.toLocaleString()}}</td>
+                <td>{{returnDate}}: {{cart.dateControlEnd.value?.toLocaleString()}}</td>
+                <td>{{returnDate}}: {{cart.totalDate}}</td>
+
+            </tr>
+            <button (click)="createRental(CartItems)" *ngIf="totalDate===totalCar" routerLink="/payment" type="button"
+                class="btn btn-primary">Pay</button>
+        </div>
+    </div>

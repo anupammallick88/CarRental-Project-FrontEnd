@@ -1,0 +1,77 @@
+<div class="container">
+
+    <br />
+
+    <div class="row">
+        <div class="row col-md-3 ">
+            <div>
+                <app-brand (brandFilter)="setBrand($event)"></app-brand>
+
+                <app-color (colorFilter)="setColor($event)"></app-color>
+            </div>
+        </div>
+
+        <div class="row col-md-9 ">
+
+            <div *ngIf="dataLoaded==false" class="d-flex justify-content-center">
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+
+
+
+
+            <div>
+
+                <div class="  position-fixed-top mb-3 ">
+                    <input type="search" [(ngModel)]="filterText" class="form-control" id="filterText"
+                        placeholder="Enter the vehicle name.">
+                </div>
+                <table *ngIf="dataLoaded==true" class="table table-hover">
+
+
+                    <thead class="table-dark ">
+
+                        <tr>
+                            <th style="width: 200px;">Vehicle Image</th>
+                            <th>Car Name</th>
+                            <th>Car brand</th>
+                            <th>Car Color</th>
+                            <th>Car Daily Price</th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+
+                        <tr *ngFor=" let carDetail of carsDetail | carFilterPipe:filterText|carBrandPipe:brandFilter|carColorPipe:colorFilter"
+                            routerLink="/carDetail/{{carDetail.carId}}">
+                            <img src="{{imageUrl}}/{{carDetail.imagePath}}" alt="..." class=" img-thumbnai"
+                                style="width: 250px; height: 200px">
+                            <td>{{carDetail.carName}}</td>
+                            <td>{{carDetail.brandName}}</td>
+                            <td>{{carDetail.colorName}}</td>
+                            <td>{{carDetail.dailyPrice}}₹</td>
+                        </tr>
+
+                        <tr *ngFor=" let carDetail of carsDetail | carFilterPipe:filterText|carBrandPipe:brandFilter|carColorPipe:colorFilter"
+                            routerLink="/carDetail/{{carDetail.carId}}">
+                            <img src="{{imageUrl}}/{{carDetail.imagePath}}" alt="..." class=" img-thumbnai"
+                                style="width: 250px; height: 200px">
+                            <td>{{carDetail.carName}}</td>
+                            <td>{{carDetail.brandName}}</td>
+                            <td>{{carDetail.colorName}}</td>
+                            <td>{{carDetail.dailyPrice}}₹</td>
+                        </tr>
+
+
+                    </tbody>
+
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>

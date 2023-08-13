@@ -1,0 +1,35 @@
+<div *ngIf="dataLoaded==false" class="d-flex justify-content-center">
+    <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+
+<div>
+    <h1 class="text-dark">Colour</h1>
+    <input type="search" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Enter color.">
+
+    <select [(ngModel)]="selectedColor" class="form-select mt-3" size="8" aria-label="size 8 select example">
+        <option *ngFor="let color of colors | colorFilterPipe:filterText" value="{{color.colorName}}">
+            {{color.colorName}}
+        </option>
+        <option *ngFor="let color of colors | colorFilterPipe:filterText" value="{{color.colorName}}">
+            {{color.colorName}}
+        </option>
+        <option *ngFor="let color of colors | colorFilterPipe:filterText" value="{{color.colorName}}">
+            {{color.colorName}}
+        </option>
+        <option *ngFor="let color of colors | colorFilterPipe:filterText" value="{{color.colorName}}">
+            {{color.colorName}}
+        </option>
+    </select>
+
+    <div class="btn-group mt-3" role="group" aria-label="Basic example">
+        <button type="button" (click)="setColor(selectedColor)" class="btn btn-secondary">
+            Filter</button>
+        <button type="button" (click)="setColor(null)" class="btn btn-dark" routerLink="/cars">
+            Filter Clear
+        </button>
+    </div>
+
+
+</div>

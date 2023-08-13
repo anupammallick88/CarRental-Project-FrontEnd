@@ -1,0 +1,16 @@
+<li *ngIf="CartItems.length>0" class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+        aria-expanded="false">
+        Cart
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <li *ngFor="let cartItem of CartItems" class="dropdown-item">
+            {{cartItem.car.carName}}
+            <span (click)="removeFromCart(cartItem.car)" class="badge bg-warning">delete </span>
+        </li>
+        <li>
+            <hr class="dropdown-divider">
+        </li>
+        <li><a class="dropdown-item" routerLink="/rental-add"> go to cart </a></li>
+    </ul>
+</li>

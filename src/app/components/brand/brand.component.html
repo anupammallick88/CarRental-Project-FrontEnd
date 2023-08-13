@@ -1,0 +1,29 @@
+<div>
+    <h1>Brand</h1>
+    <input type="search" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Enter the brand.">
+
+    <select [(ngModel)]="selectedBrand" class="form-select mt-3" size="8" aria-label="size 8 select example">
+        <option *ngFor="let brand of brands | brandFilterPipe:filterText " value="{{brand.brandName}}">
+            {{brand.brandName}}
+        </option>
+        <option *ngFor="let brand of brands | brandFilterPipe:filterText" value="{{brand.brandName}}">
+            {{brand.brandName}}
+        </option>
+        <option *ngFor="let brand of brands | brandFilterPipe:filterText" value="{{brand.brandName}}">
+            {{brand.brandName}}
+        </option>
+        <option *ngFor="let brand of brands | brandFilterPipe:filterText" value="{{brand.brandName}}">
+            {{brand.brandName}}
+        </option>
+
+    </select>
+
+    <div class="btn-group mt-3 " role="group" aria-label="Basic example">
+        <button type="button" (click)="setBrand(selectedBrand)" class="btn btn-secondary">
+            Filter
+        </button>
+        <button type="button" (click)="setBrand(null)" class="btn btn-dark " routerLink="/cars">
+            Filter Clear
+        </button>
+    </div>
+</div>
